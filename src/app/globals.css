@@ -1,0 +1,134 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --bg: #F6F3EE;
+    --card: #FFFFFF;
+    --ink: #111827;
+    --ink-muted: #6B7280;
+    --gold: #C89B5B;
+    --slate: #1E293B;
+    --border: #E5DCCF;
+  }
+
+  * {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-inter), system-ui, sans-serif;
+  }
+
+  ::selection {
+    background-color: #C89B5B22;
+    color: #111827;
+  }
+}
+
+@layer components {
+  .eyebrow {
+    @apply text-xs uppercase tracking-[0.25em] text-gold font-medium font-sans;
+  }
+
+  .section-title {
+    @apply font-serif font-light text-display-sm text-ink;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center gap-2 bg-slate text-white text-sm px-7 py-3.5 font-medium font-sans
+           hover:bg-gold transition-all duration-300 cursor-pointer;
+  }
+
+  .btn-gold {
+    @apply inline-flex items-center gap-2 bg-gold text-white text-sm px-7 py-3.5 font-medium font-sans
+           hover:bg-gold-dark transition-all duration-300 cursor-pointer;
+  }
+
+  .btn-outline {
+    @apply inline-flex items-center gap-2 border border-border text-ink text-sm px-7 py-3.5 font-medium font-sans
+           hover:border-ink transition-all duration-300 cursor-pointer bg-transparent;
+  }
+
+  .btn-ghost {
+    @apply inline-flex items-center gap-2 text-ink text-sm font-medium font-sans
+           border-b border-border pb-0.5 hover:border-ink transition-colors duration-300 cursor-pointer;
+  }
+
+  .label-field {
+    @apply block text-xs uppercase tracking-widest text-ink-muted font-medium mb-2 font-sans;
+  }
+
+  .input-field {
+    @apply w-full border border-border bg-white px-4 py-3 text-sm text-ink font-sans
+           focus:outline-none focus:border-ink transition-colors duration-200
+           placeholder:text-ink-muted;
+  }
+
+  .card {
+    @apply bg-card border border-border p-6;
+  }
+
+  .section-padding {
+    @apply px-6 md:px-12 lg:px-20 xl:px-28;
+  }
+
+  .nav-link {
+    @apply text-sm text-ink-muted hover:text-ink transition-colors duration-200 font-sans;
+  }
+
+  .status-badge {
+    @apply inline-flex items-center gap-1.5 px-3 py-1 text-xs font-medium font-sans;
+  }
+
+  .status-pending {
+    @apply bg-amber-50 text-amber-700 border border-amber-200;
+  }
+
+  .status-confirmed {
+    @apply bg-emerald-50 text-emerald-700 border border-emerald-200;
+  }
+
+  .status-cancelled {
+    @apply bg-red-50 text-red-700 border border-red-200;
+  }
+
+  .status-completed {
+    @apply bg-slate/10 text-slate border border-slate/20;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* Custom scrollbar for admin */
+.admin-scroll::-webkit-scrollbar {
+  width: 4px;
+}
+.admin-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+.admin-scroll::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 2px;
+}
