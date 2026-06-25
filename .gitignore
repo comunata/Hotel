@@ -8,4 +8,5 @@ dist/
 *.log
 tsconfig.tsbuildinfo
 *.zip
+next-env.d.ts
 .vercel
