@@ -7,4 +7,5 @@ out/
 dist/
 *.log
 tsconfig.tsbuildinfo
+*.zip
 .vercel
