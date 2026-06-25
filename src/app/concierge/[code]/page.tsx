@@ -4,6 +4,7 @@ const PROPERTY = {
   name: 'Poiana Salcâmilor',
   address: 'Negrești, Vaslui, România',
   phone: '+40 700 000 000',
+  email: 'contact@poianasalcamilor.ro',
   googleMapsUrl: 'https://maps.google.com',
   arrivalTime: 'Check-in de la ora 15:00',
   departureTime: 'Check-out până la ora 12:00',
@@ -142,7 +143,8 @@ export default function ConciergePage({ params }: { params: { code: string } }) 
         {/* Emergency contact */}
         <div className="mt-8 border border-gold/30 bg-gold/5 p-5">
           <p className="text-xs uppercase tracking-widest text-gold font-sans mb-2">Contact proprietar</p>
-          <p className="font-medium text-ink font-sans">{PROPERTY.phone}</p>
+          <a href={`tel:${PROPERTY.phone}`} className="font-medium text-ink font-sans block hover:text-gold transition-colors">{PROPERTY.phone}</a>
+          <a href={`mailto:${PROPERTY.email}`} className="text-sm text-ink-muted font-sans mt-0.5 block hover:text-gold transition-colors">{PROPERTY.email}</a>
           <p className="text-sm text-ink-muted font-sans mt-1">
             Disponibil zilnic, 08:00 – 22:00
           </p>
