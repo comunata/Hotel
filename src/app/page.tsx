@@ -1,32 +1,34 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import ExperiencePlanner from '@/components/ExperiencePlanner'
 
-function PhotoPlaceholder({
-  className,
-  label,
-  overlay = 'from-slate/60 via-slate/20 to-transparent',
-}: {
-  className?: string
-  label?: string
-  overlay?: string
-}) {
-  return (
-    <div className={`relative overflow-hidden bg-[#2a3d2f] ${className}`}>
-      <div className={`absolute inset-0 bg-gradient-to-b ${overlay}`} />
-      <div
-        className="absolute inset-0 opacity-10"
-        style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.4'/%3E%3C/svg%3E")`,
-        }}
-      />
-      {label && (
-        <div className="absolute bottom-4 left-4 text-white/40 text-[10px] font-medium tracking-[0.2em] uppercase font-sans">
-          {label}
-        </div>
-      )}
-    </div>
-  )
-}
+const MOOD = [
+  {
+    title: 'Cafea pe terasă la răsărit',
+    time: '07:00',
+    src: '/images/poiana/FB_IMG_1782372639460.jpg',
+  },
+  {
+    title: 'Liniște în natură',
+    time: '11:00',
+    src: '/images/poiana/FB_IMG_1782372624528.jpg',
+  },
+  {
+    title: 'Confort cald în interior',
+    time: '14:00',
+    src: '/images/poiana/FB_IMG_1782372651713.jpg',
+  },
+  {
+    title: 'Seară relaxantă',
+    time: '19:00',
+    src: '/images/poiana/FB_IMG_1782372655006.jpg',
+  },
+  {
+    title: 'Dimineață fără grabă',
+    time: '09:00',
+    src: '/images/poiana/FB_IMG_1782372630817.jpg',
+  },
+]
 
 export default function HomePage() {
   return (
@@ -93,13 +95,18 @@ export default function HomePage() {
           </div>
         </div>
 
-        {/* Right — photo */}
-        <div className="absolute inset-0 lg:relative lg:inset-auto opacity-20 lg:opacity-100">
-          <PhotoPlaceholder
-            className="w-full h-full"
-            label="Fotografie: Poiana Salcâmilor"
-            overlay="from-transparent via-transparent to-transparent"
-          />
+        {/* Right — hero photo: cabana noaptea cu zapada */}
+        <div className="absolute inset-0 lg:relative lg:inset-auto opacity-25 lg:opacity-100">
+          <div className="relative w-full h-full">
+            <Image
+              src="/images/poiana/FB_IMG_1782372660467.jpg"
+              alt="Poiana Salcâmilor noaptea"
+              fill
+              className="object-cover"
+              priority
+            />
+            <div className="absolute inset-0 bg-gradient-to-r from-sand via-transparent to-transparent lg:from-transparent hidden lg:block" />
+          </div>
         </div>
       </section>
 
@@ -123,19 +130,18 @@ export default function HomePage() {
 
         <div className="section-padding overflow-x-auto scrollbar-hide">
           <div className="flex gap-4 pb-2" style={{ minWidth: 'max-content' }}>
-            {[
-              { title: 'Cafea pe terasă la răsărit', time: '07:00' },
-              { title: 'Apus lângă apă', time: '20:30' },
-              { title: 'Ciubăr seara sub stele', time: '21:00' },
-              { title: 'Focar cu prietenii', time: '22:00' },
-              { title: 'Dimineață fără grabă', time: '09:00' },
-            ].map((item, i) => (
+            {MOOD.map((item, i) => (
               <div
                 key={i}
                 className="relative flex-shrink-0 w-60 h-[340px] overflow-hidden group cursor-default"
-                style={{ animationDelay: `${i * 100}ms` }}
               >
-                <PhotoPlaceholder className="w-full h-full" overlay="from-slate/70 via-transparent to-transparent" />
+                <Image
+                  src={item.src}
+                  alt={item.title}
+                  fill
+                  className="object-cover transition-transform duration-700 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-slate/80 via-slate/20 to-transparent" />
                 <div className="absolute inset-0 flex flex-col justify-end p-5">
                   <span className="text-white/50 text-[10px] font-mono mb-2">{item.time}</span>
                   <p className="text-white text-base font-serif font-light leading-snug">{item.title}</p>
@@ -198,8 +204,38 @@ export default function HomePage() {
                 Rezervă o experiență
               </Link>
             </div>
-            <PhotoPlaceholder className="h-[420px] lg:h-[520px]" label="Proprietate exterior" />
+
+            {/* Property exterior photo */}
+            <div className="relative h-[420px] lg:h-[520px] overflow-hidden">
+              <Image
+                src="/images/poiana/FB_IMG_1782372648611.jpg"
+                alt="Cabana Poiana Salcâmilor exterior"
+                fill
+                className="object-cover"
+              />
+            </div>
           </div>
+        </div>
+      </section>
+
+      {/* ─── GALLERY STRIP ───────────────────────────────────────────────── */}
+      <section className="py-4">
+        <div className="grid grid-cols-4 gap-1">
+          {[
+            '/images/poiana/FB_IMG_1782372636613.jpg',
+            '/images/poiana/FB_IMG_1782372641971.jpg',
+            '/images/poiana/FB_IMG_1782372657747.jpg',
+            '/images/poiana/FB_IMG_1782372666396.jpg',
+          ].map((src, i) => (
+            <div key={i} className="relative h-40 overflow-hidden group">
+              <Image
+                src={src}
+                alt={`Poiana Salcâmilor ${i + 1}`}
+                fill
+                className="object-cover transition-transform duration-500 group-hover:scale-105"
+              />
+            </div>
+          ))}
         </div>
       </section>
 
@@ -268,6 +304,9 @@ export default function HomePage() {
           <div>
             <span className="font-serif text-lg font-medium text-ink">Poiana Salcâmilor</span>
             <p className="text-xs text-ink-muted font-sans mt-1">Negrești, Vaslui, România</p>
+            <a href="mailto:contact@poianasalcamilor.ro" className="text-xs text-ink-muted font-sans mt-0.5 block hover:text-gold transition-colors">
+              contact@poianasalcamilor.ro
+            </a>
           </div>
           <div className="flex flex-col md:flex-row gap-4 md:gap-8 text-sm font-sans">
             <Link href="/rezervare" className="nav-link">Rezervare</Link>
